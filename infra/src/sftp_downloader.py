@@ -7,19 +7,19 @@ data_storage = pathlib.Path(__file__).parent.parent / "data_storage"
 local_filepath = pathlib.Path(__file__).parent.parent / "downloaded_data"
 pathlib.Path(local_filepath).mkdir(mode=0o777, parents=False, exist_ok=True)
 def download_files(sftp_details=SFTP_CONFIG):
-#     cnopts = pysftp.CnOpts()
-#     cnopts.hostkeys = None  # Not recommended for production
+    cnopts = pysftp.CnOpts()
+    cnopts.hostkeys = None  # Not recommended for production
     files = []
-#     with pysftp.Connection(**sftp_details, cnopts=cnopts) as sftp:
-#         sftp.chdir('data/')  # Target directory
-#         files = sftp.listdir()
-#
-#         for file in files:
-#             if file.endswith('.csv'):
-#                 local_filepath = os.path.join('downloaded_data', file)
-#                 sftp.get(file, local_filepath)
-#                 print(f"Downloaded {file}")
-#
+    with pysftp.Connection(**sftp_details, cnopts=cnopts) as sftp:
+        sftp.chdir('data/')  # Target directory
+        files = sftp.listdir()
+
+        for file in files:
+            if file.endswith('.csv'):
+                local_filepath = os.path.join('downloaded_data', file)
+                sftp.get(file, local_filepath)
+                print(f"Downloaded {file}")
+
     return files
 
 
